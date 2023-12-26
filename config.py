@@ -1,0 +1,1 @@
+news_api_key = "pub_35346f1fbc25d07e536ac6a3479b4b86fef71"
