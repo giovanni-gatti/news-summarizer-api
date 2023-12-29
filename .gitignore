@@ -1,1 +1,5 @@
 models/
+bart-onnx/
+distilbart-onnx/
+**/__pycache__/
+__pycache__/

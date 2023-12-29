@@ -3,4 +3,4 @@ langchain
 connexion[swagger-ui]==2.14.1
 newsdataapi
 huggingface-hub>=0.17.1
-CMAKE_ARGS="-DLLAMA_BLAS=ON -DLLAMA_BLAS_VENDOR=OpenBLAS" --upgrade --force-reinstall llama-cpp-python --no-cache-dir --verbose
+
