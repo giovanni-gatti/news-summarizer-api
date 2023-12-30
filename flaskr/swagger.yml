@@ -10,7 +10,7 @@ servers:
 paths:
   /news:
     get:
-      operationId: "model.bbc_parser.parser.BBC_Parser.get_link_name_pairs_categories"
+      operationId: "service.summarizer_service.test"
       tags:
         - "News"
       summary: "Read the list of news categories"
