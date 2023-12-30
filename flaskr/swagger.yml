@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: "Flask REST API"
+  description: "API to summarize news articles using an LLM"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+paths:
+  /news:
+    get:
+      operationId: "model.bbc_parser.parser.BBC_Parser.get_link_name_pairs_categories"
+      tags:
+        - "News"
+      summary: "Read the list of news categories"
+      responses:
+        "200":
+          description: "Successfully read news categories list"

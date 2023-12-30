@@ -61,7 +61,7 @@ class BartModel(LLM):
     
     @property
     def _llm_type(self) -> str:
-        return "facebook/bart-large-cnn"
+        return "facebook/bart"
     
     def _call(
         self,

@@ -1,5 +1,5 @@
-from bart_llm.llm import BartModel
-from bart_llm.summarizer import Summarizer
+from flaskr.model.bart_llm.llm_model import BartModel
+from flaskr.model.bart_llm.summarizer_model import Summarizer
 from transformers.utils import logging
 import onnxruntime as ort
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     ort.set_default_logger_severity(3)
     logging.set_verbosity_error()
 
-    llm = BartModel("./distilbart-onnx")
+    llm = BartModel("./flaskr/model/files/distilbart-onnx")
     summarizer = Summarizer(llm) 
 
     summary = summarizer.summarize(text)
