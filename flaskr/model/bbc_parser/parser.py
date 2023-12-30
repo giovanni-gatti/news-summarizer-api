@@ -27,7 +27,9 @@ class BBC_Parser:
         first_tag = soup.find('div', class_ = 'gs-u-display-none gs-u-display-block@m nw-o-news-wide-navigation')
         tags = first_tag.find_all('a', class_ = 'nw-o-link')
         result = [(tag.get_text(), tag.get('href')) for tag in tags if tag and tag.get_text() and tag.get('href')]
-        return result[1::]# skipping the first element since it represents the main page
+        result = result[1::]# skipping the first element since it represents the main page
+        result = {item[0] : item[1] for item in result}
+        return result
     
     @classmethod
     def get_link_name_pairs_articles_from_main_page(cls) -> List[Tuple[str, str]]:

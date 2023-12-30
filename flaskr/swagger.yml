@@ -21,6 +21,13 @@ paths:
   /news:
     get:
       operationId: "service.summarizer_service.test"
+      parameters:
+        - in: query
+          name: category
+          required: true
+          schema:
+            type: string
+          description: The category of articles to retrieve
       tags:
         - "News"
       summary: "Read the list of news categories"
