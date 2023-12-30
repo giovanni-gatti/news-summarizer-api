@@ -7,6 +7,16 @@ info:
 servers:
   - url: "/api"
 
+components:
+  schemas:
+    Prompt:
+      type: "object"
+      required:
+        - text
+      properties:
+        text:
+          type: "string"
+
 paths:
   /news:
     get:
@@ -17,3 +27,21 @@ paths:
       responses:
         "200":
           description: "Successfully read news categories list"
+  /summary:
+    post:
+      operationId: "service.summarizer_service.get_summary"
+      tags:
+        - "News"
+      summary: "Get summary"
+      requestBody:
+          description: "Article to summarize"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "prompt"
+                $ref: "#/components/schemas/Prompt"
+      responses:
+        "201":
+          description: "Successfully generated summary"
+

@@ -2,7 +2,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains.summarize import load_summarize_chain
 from langchain.docstore.document import Document
 from typing import List
-from flaskr.model.bart_llm.llm_model import BartModel
+from model.bart_llm.llm_model import BartModel
 
 class Summarizer():
     """
