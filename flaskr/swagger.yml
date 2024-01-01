@@ -9,18 +9,28 @@ servers:
 
 components:
   schemas:
-    Prompt:
+    Url:
       type: "object"
       required:
-        - text
+        - url
       properties:
-        text:
+        url:
           type: "string"
 
 paths:
-  /news:
+  /categories:
     get:
-      operationId: "service.summarizer_service.test"
+      operationId: "service.summarizer_service.get_available_categories"
+      tags:
+        - "News"
+      summary: "Read the list of list of available news categories"
+      responses:
+        "200":
+          description: "Successfully read list of available categories"
+
+  /category_headlines_summaries:
+    get:
+      operationId: "service.summarizer_service.category_headlines_summaries"
       parameters:
         - in: query
           name: category
@@ -30,24 +40,25 @@ paths:
           description: The category of articles to retrieve
       tags:
         - "News"
-      summary: "Read the list of news categories"
+      summary: "Get the summaries of the top 3 headlines on the selected category page of the BBC website"
       responses:
         "200":
           description: "Successfully read news categories list"
-  /summary:
+
+  /article_summary:
     post:
-      operationId: "service.summarizer_service.get_summary"
+      operationId: "service.summarizer_service.submit_free_url"
       tags:
         - "News"
-      summary: "Get summary"
+      summary: "Get summary of a single BBC article via uploading its link"
       requestBody:
           description: "Article to summarize"
           required: True
           content:
             application/json:
               schema:
-                x-body-name: "prompt"
-                $ref: "#/components/schemas/Prompt"
+                x-body-name: "url"
+                $ref: "#/components/schemas/Url"
       responses:
         "201":
           description: "Successfully generated summary"

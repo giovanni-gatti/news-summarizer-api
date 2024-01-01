@@ -5,7 +5,6 @@ from langchain.callbacks.manager import CallbackManagerForLLMRun
 from typing import Any, Optional, List, Mapping
 import time
 
-
 class BartModel(LLM):
     """
     Custom Langchain LLM class
@@ -37,7 +36,7 @@ class BartModel(LLM):
 
     def __init__(self, model_path):
         super(BartModel, self).__init__()
-        self.model_path: str = model_path 
+        self.model_path: str = model_path
         self.model = ORTModelForSeq2SeqLM.from_pretrained(model_path)
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
 
