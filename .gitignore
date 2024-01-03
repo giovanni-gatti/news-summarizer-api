@@ -1,4 +1,5 @@
 models/
+files/
 bart-onnx/
 distilbart-onnx/
 **/__pycache__/

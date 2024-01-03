@@ -1,6 +1,13 @@
-Flask
-langchain
+Flask==2.2.2
+langchain==0.0.352
 connexion[swagger-ui]==2.14.1
-newsdataapi
 huggingface-hub>=0.17.1
+python-dotenv==1.0.0
+beautifulsoup4==4.12.2
+onnx==1.15.0
+onnxruntime==1.16.3
+optimum==1.16.1
+torch==2.1.2
+transformers==4.36.2
+requests==2.31.0
 

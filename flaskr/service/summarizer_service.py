@@ -14,7 +14,7 @@ def initialize_summarizer():
     """
     Initialize LLM model
     """
-    llm = BartModel("./flaskr/model/files/distilbart-onnx")
+    llm = BartModel(current_app.config['MODEL_PATH'], model_onnx= current_app.config['MODEL_ONNX'])
     return Summarizer(llm)
 
 def category_headlines_summaries(category):

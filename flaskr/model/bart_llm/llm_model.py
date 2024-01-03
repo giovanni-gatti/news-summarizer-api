@@ -1,9 +1,9 @@
 from optimum.onnxruntime import ORTModelForSeq2SeqLM
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from langchain.llms.base import LLM
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from typing import Any, Optional, List, Mapping
-import time
+import torch
 
 class BartModel(LLM):
     """
@@ -15,8 +15,10 @@ class BartModel(LLM):
     """    
 
     # system arguments
-    model_path:    str = None
-    model_context: int = 1024
+    model_path:    str  = None
+    model_onnx:    bool = False
+    model_context: int  = 1024
+    device:        str  = 'cpu'
 
     # optional model arguments
     min_length:     Optional[int]   = 150
@@ -34,10 +36,20 @@ class BartModel(LLM):
     model:     Any = None
     tokenizer: Any = None
 
-    def __init__(self, model_path):
+    def __init__(self, model_path, model_onnx):
         super(BartModel, self).__init__()
-        self.model_path: str = model_path
-        self.model = ORTModelForSeq2SeqLM.from_pretrained(model_path)
+        self.model_path:   str  = model_path
+        self.model_onnx:   bool = model_onnx
+
+        if torch.backends.mps.is_available():  
+            self.device: str = 'mps'
+        elif torch.cuda.is_available():
+            self.device: str = 'cuda'
+
+        if model_onnx:
+            self.model = ORTModelForSeq2SeqLM.from_pretrained(model_path).to(self.device)
+        else:
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path).to(self.device)            
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
 
     @property
@@ -55,12 +67,13 @@ class BartModel(LLM):
         return {
             'model_name' : self._llm_type,
             'model_path' : self.model_path,
+            'model_onnx' : self.model_onnx,
             **self._get_model_default_parameters
         }
     
     @property
     def _llm_type(self) -> str:
-        return "facebook/bart"
+        return "Transformer Encoder-Decoder (Seq2Seq) Model"
     
     def _call(
         self,
@@ -79,13 +92,10 @@ class BartModel(LLM):
             **kwargs
         }
 
-        start = time.time()
         inputs = self.tokenizer.encode(prompt, return_tensors= self.return_tensors, truncation= self.truncation)
-        token_ids = self.model.generate(inputs, **model_params)
+        token_ids = self.model.generate(inputs.to(self.device), **model_params)
         summary = self.tokenizer.decode(token_ids[0], skip_special_tokens= self.skip_special_tokens)
-        end = time.time()
 
-        print(end - start)
         return summary
 
         
