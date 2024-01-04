@@ -57,10 +57,12 @@ The backend of this application is designed to run on both CPUs and GPUs, levera
 
 When choosing a model, consider your device specifications, including hardware accelerators and available RAM.
 To speed up inference on CPUs, the applications supports models also in ONNX format and allows to run inference with the accelerated ONNX Runtime and graph optimizations. To convert and optimize an Hugging Face model to ONNX format, run the following command from a terminal:
-    ```bash
-    optimum-cli export onnx --model model_name --optimize O2 --framework pt --task text2text-generation-with-past local_model_folder
-    ```
+
+```bash
+optimum-cli export onnx --model model_name --optimize O2 --framework pt --task text2text-generation-with-past local_model_folder
+```
 To customize your model selection when running the application, navigate to the `.env` file and specify the fields appropriately:
+
 ```
 model_path: either the path to a local directory or the identifier name of a pre-trained model on Hugging Face, to be loaded from cache
 model_onnx: set to True if the selected model is in ONNX format
