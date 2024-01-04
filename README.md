@@ -67,3 +67,10 @@ To customize your model selection when running the application, navigate to the 
 model_path: either the path to a local directory or the identifier name of a pre-trained model on Hugging Face, to be loaded from cache
 model_onnx: set to True if the selected model is in ONNX format
 ```
+
+## References and Resources
+ - [ONNX Runtime](https://onnxruntime.ai/)
+ - [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
+ - [HuggingFace Documentation](https://huggingface.co/docs)
+ - [OpenAPI Specification](https://spec.openapis.org/oas/v3.0.0.html)
+
