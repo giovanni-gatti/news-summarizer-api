@@ -73,4 +73,3 @@ model_onnx: set to True if the selected model is in ONNX format
  - [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
  - [HuggingFace Documentation](https://huggingface.co/docs)
  - [OpenAPI Specification](https://spec.openapis.org/oas/v3.0.0.html)
-
