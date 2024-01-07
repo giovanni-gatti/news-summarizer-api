@@ -32,7 +32,7 @@ def category_headlines_summaries(category):
     article_link_pairs = BBC_Parser.get_link_name_pairs_articles_from_category_url(url)
     summarizer = initialize_summarizer()
     response = []
-    for i in range(5):
+    for i in range(3):
         title, article_endpoint = article_link_pairs[i]
         article_url = BBC_Parser.WEBSITE_URL + article_endpoint
         text = BBC_Parser.get_text_from_article(article_url)

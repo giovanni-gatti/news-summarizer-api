@@ -14,7 +14,7 @@ def create_app():
     flask_app.config['CATEGORIES_ENDPOINT_MAP'] = category_endpoint_map
 
     flask_app.config['MODEL_PATH'] = os.environ.get("model_path")
-    flask_app.config['MODEL_ONNX'] = os.environ.get("model_onnx")
+    flask_app.config['MODEL_ONNX'] = False if os.environ.get("model_onnx").lower() == "false" else True
 
     return app
 
