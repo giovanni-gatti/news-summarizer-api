@@ -13,7 +13,7 @@ class Summarizer():
     model: (BartModel) BartModel LLM object 
     """ 
     
-    chunk_size:    int = 1024
+    chunk_size:    int = 800
     chunk_overlap: int = 20
 
     def __init__(self, model: BartModel) -> None:
